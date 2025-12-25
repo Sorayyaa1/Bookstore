@@ -1,78 +1,89 @@
 import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import HomePageBackground from "../public/Images/HomePageBackground.jpg"
+import { ChangeEvent, useState ,useContext } from "react";
+import { useRouter } from "next/router";
+import { book, BookContext } from "./Context";
+import {categoryArray} from "./core/constance/categoryList"
+import { log } from "console";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+function Home(){
+    
+    const{allBooksList,setFilterItems,filterItems}=useContext(BookContext)
+    const[search,setSearch]=useState<string>()
+    
+    function handlerChangeInput(e:ChangeEvent<HTMLInputElement>){
+        const searchValue=e.target.value.trim()
+        setSearch(searchValue)
+    }
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+    function handlerSearch(Item=search){
+        const router=useRouter()
+        if(Item){
+            let filterItem:book[]
+            filterItem=allBooksList.filter(item=>item.title.toLowerCase().includes(Item.toLowerCase()))
+           setFilterItems(filterItem)
+           console.log("es geht");
+        }
+        console.log("es geht");
+        
+        router.push('/filter')
+        
+    }
 
-export default function Home() {
-  return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
-    >
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the index.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+   return(
+        <div className="homeBackground h-screen relative flex flex-col items-center">
+            <Image 
+            alt="HomePageBackground"
+            src={HomePageBackground}
+            quality={100}
+            fill
+            priority
+            style={{
+               objectFit: 'cover',
+               position:"absolute"
+             }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs/pages/getting-started?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className="absolute z-10 top-1/4 flex flex-col items-center gap-4 w-full">
+                <p className="text-5xl text-amber-400 font-extrabold max-w-lg">A world of books, one click away</p>
+                <p className="text-amber-500 text-lg font-semibold">Thousands of books across genres and ages, waiting to inspire your next chapter</p>
+            </div>
+            <div className="selectBook w-7/12 p-6 absolute z-10 top-7/12 flex items-end gap-4 text-amber-500 bg-amber-900 opacity-80 rounded-2xl">
+                <div>
+                   <label htmlFor="searchBook" >Search Book</label>
+                   <input type="text" placeholder="Search by title/ author's name" id="searchBook" className="outline-none w-full border-2 border-amber-600 rounded-xl p-2" onChange={handlerChangeInput}/>
+                </div>
+                <div>
+                    <label htmlFor="genre" >Genre</label>
+                    <select name="" id="genre" className="border-2 border-amber-600 rounded-xl p-2 text-amber-600">
+                        {
+                            categoryArray.map((item,index)=>(
+                                <option key={index} value={item.category}>{item.title}</option>
+                            ))
+                        }
+                    </select>
+                </div>
+                <div>
+                    <label htmlFor="priceFrom" >Price From</label>
+                    <select name="" id="priceFrom" className="border-2 border-amber-600 rounded-xl p-2 text-amber-600">
+                        <option value="10">$ 10</option>
+                        <option value="100">$ 100</option>
+                        <option value="1000">$ 1000</option>
+                    </select>
+                </div>
+                <div>
+                    <label htmlFor="priceTo" >Price To</label>
+                    <select name="" id="priceTo" className="border-2 border-amber-600 rounded-xl p-2 text-amber-600">
+                        <option value="10">$ 10</option>
+                        <option value="100">$ 100</option>
+                        <option value="1000">$ 1000</option>
+                        <option value="10000">$ 10000</option>
+                    </select>
+                </div>
+                <button type="button" onClick={handlerSearch} className="text-amber-400 bg-amber-600 font-bold py-2 px-6 rounded-xl hover:bg-yellow-600 hover:text-amber-100 ">Search</button>
+            </div>
+            
         </div>
-      </main>
-    </div>
-  );
+   )
 }
+
+export default Home
