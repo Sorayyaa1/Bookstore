@@ -39,9 +39,9 @@
 //       Item && Item.qty===1 && (state.cartItems=state.cartItems.filter(item=>item.CartItem.cartItem.id!==Item.CartItem.cartItem.id))
       
 //      },
-//     incrementByAmount: (state:CartItemsState, action: PayloadAction<number>) => {
+//     // incrementByAmount: (state:CartItemsState, action: PayloadAction<number>) => {
       
-//     }
+//     // }
 //   }
 // })
 

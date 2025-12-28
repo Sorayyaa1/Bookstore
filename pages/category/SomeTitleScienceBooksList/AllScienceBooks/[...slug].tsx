@@ -48,11 +48,17 @@ const FictionBookDetails = () => {
                     </div>
                   </div>
               </div>
-              <div className='flex justify-between items-center px-[21vw]'>
+              <div className='flex justify-between items-center w-10/12 mx-auto px-[10vw] '>
                 <p className="bg-amber-500 py-2 px-6 rounded-2xl">{selectedBook.price} $</p>
-                <button onClick={AddToShoppingCart} className="bg-amber-400 rounded-2xl text-xl py-2 w-1/2 shadow-amber-800 shadow-lg hover:bg-amber-700 hover:text-amber-100">Add To Shapping Cart</button>
+                <div className="flex justify-between w-2/3  ">
+                  <div className="flex gap-4 px-[1vw] items-center">
+                    <button className="shopBtns px-4">+</button>
+                    <span>0</span>
+                    <button className="shopBtns px-4">-</button>
+                  </div>
+                  <button  onClick={AddToShoppingCart} className="shopBtns w-2/3">Add To Shapping Cart</button>
+                </div>
               </div>
-              
             </div>
           ) :
           (undefined)

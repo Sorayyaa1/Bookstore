@@ -4,25 +4,51 @@ import { ChangeEvent, useState ,useContext } from "react";
 import { useRouter } from "next/router";
 import { book, BookContext } from "./Context";
 import {categoryArray} from "./core/constance/categoryList"
+import {priceFromList,priceToList} from "./core/constance/minimumMaximumPrices"
 
 function Home(){
-    
-    const{allBooksList,setFilterItems,filterItems}=useContext(BookContext)
+    const router=useRouter()
+    const{allBooksList,
+        setFilterItems,filterItems,
+        categoryFilter,setCategoryFilter,
+        priceFrom,setPriceFrom,
+        priceTo,setPriceTo
+        }=useContext(BookContext)
     const[search,setSearch]=useState<string>()
     
     function handlerChangeInput(e:ChangeEvent<HTMLInputElement>){
         const searchValue=e.target.value.trim()
         setSearch(searchValue)
     }
+    
+    function handlerCategory(event:ChangeEvent<HTMLSelectElement>){
+        const genre=event.target.value
+        setCategoryFilter(genre)         
+    }
 
-    function handlerSearch(Item=search){
-        const router=useRouter()
+    function handlerPriceFrom(event:ChangeEvent<HTMLSelectElement>){
+        const price=event.target.value
+        const minPrice=parseInt(price)
+        setPriceFrom(minPrice)
+    }
+
+    function handlerPriceTo(event:ChangeEvent<HTMLSelectElement>){
+       const price=event.target.value
+       const maxPrice=parseInt(price)
+       setPriceTo(maxPrice)
+    }
+ 
+    function handlerSearch(Item=search,genre=categoryFilter,minimumPrice=priceFrom,maximumPrice=priceTo){
         if(Item){
-            let filterItem:book[]
-            filterItem=allBooksList.filter(item=>item.title.toLowerCase().includes(Item.toLowerCase()))
-           setFilterItems(filterItem)
-           
-        }
+            let filterBook:book[]
+            if(filterBook=allBooksList.filter(item=>item.title.toLowerCase().includes(Item.toLowerCase()))){
+                if(filterBook=filterBook.filter(item=>item.category===genre)){
+                    if(filterBook=filterBook.filter(item=>item.price>=minimumPrice && item.price<=maximumPrice)){
+                        setFilterItems(filterBook)
+                    }
+                }
+            }
+        } 
         router.push('/filter') 
     }
 
@@ -50,7 +76,7 @@ function Home(){
                 </div>
                 <div>
                     <label htmlFor="genre" >Genre</label>
-                    <select name="" id="genre" className="border-2 border-amber-600 rounded-xl p-2 text-amber-600">
+                    <select name="" id="genre" onChange={handlerCategory} className="border-2 border-amber-600 rounded-xl p-2 text-amber-600">
                         {
                             categoryArray.map((item,index)=>(
                                 <option key={index} value={item.category}>{item.title}</option>
@@ -60,19 +86,22 @@ function Home(){
                 </div>
                 <div>
                     <label htmlFor="priceFrom" >Price From</label>
-                    <select name="" id="priceFrom" className="border-2 border-amber-600 rounded-xl p-2 text-amber-600">
-                        <option value="10">$ 10</option>
-                        <option value="100">$ 100</option>
-                        <option value="1000">$ 1000</option>
+                    <select onChange={handlerPriceFrom} name="" id="priceFrom" className="border-2 border-amber-600 rounded-xl p-2 text-amber-600">
+                        {
+                            priceFromList.map((item,index)=>(
+                               <option key={index} value={item.value}>$ {item.price}</option>
+                            ))
+                        }
                     </select>
                 </div>
                 <div>
                     <label htmlFor="priceTo" >Price To</label>
-                    <select name="" id="priceTo" className="border-2 border-amber-600 rounded-xl p-2 text-amber-600">
-                        <option value="10">$ 10</option>
-                        <option value="100">$ 100</option>
-                        <option value="1000">$ 1000</option>
-                        <option value="10000">$ 10000</option>
+                    <select onChange={handlerPriceTo} name="" id="priceTo" className="border-2 border-amber-600 rounded-xl p-2 text-amber-600">
+                        {
+                            priceToList.map((item,index)=>(
+                                <option key={index} value={item.value}>$ {item.price}</option>
+                            ))
+                        }
                     </select>
                 </div>
                 <button type="button" onClick={()=>handlerSearch(search)} className="text-amber-400 bg-amber-600 font-bold py-2 px-6 rounded-xl hover:bg-yellow-600 hover:text-amber-100 ">Search</button>

@@ -18,7 +18,7 @@ export interface book{
 
 interface BookContextType{
 allBooksList:book[]
-setFilterItems:React.Dispatch<React.SetStateAction<book[] | never>>
+setFilterItems:React.Dispatch<React.SetStateAction<book[] | undefined>>
 filterItems:book[] | undefined
 selectedBook:book | undefined
 setSelectedBook:React.Dispatch<React.SetStateAction<book | undefined>>
@@ -26,6 +26,12 @@ btnValue: number | undefined
 setBtnValue:React.Dispatch<React.SetStateAction<number | undefined>>
 qty:number
 setQty:React.Dispatch<React.SetStateAction<number>>
+categoryFilter:string
+setCategoryFilter:React.Dispatch<React.SetStateAction<string>>
+priceFrom:number
+setPriceFrom:React.Dispatch<React.SetStateAction<number>>
+priceTo:number
+setPriceTo:React.Dispatch<React.SetStateAction<number>>
 }
 
 const allBooksList:book[]=[
@@ -58,14 +64,17 @@ const allBooksList:book[]=[
 export const BookContext=createContext< BookContextType>({} as BookContextType)
 
 function BookProvider({children}:children){
-    const [filterItems,setFilterItems]=useState<book[]>([])
+    const [filterItems,setFilterItems]=useState<book[]>()
     const [selectedBook,setSelectedBook]=useState<book>()
     const [btnValue,setBtnValue]=useState<number>()
     const [qty,setQty]=useState<number>(0)
-    
-    
+    const [categoryFilter,setCategoryFilter]=useState<string>('')
+    const [priceFrom,setPriceFrom]=useState<number>(10)
+    const [priceTo,setPriceTo]=useState<number>(10)
+
+
     return(
-        <BookContext.Provider value={{allBooksList,setFilterItems,filterItems,selectedBook,setSelectedBook,btnValue,setBtnValue,qty,setQty}}>
+        <BookContext.Provider value={{allBooksList,setFilterItems,filterItems,selectedBook,setSelectedBook,btnValue,setBtnValue,qty,setQty,categoryFilter,setCategoryFilter,priceFrom,setPriceFrom,priceTo,setPriceTo}}>
            {children}
         </BookContext.Provider >
 

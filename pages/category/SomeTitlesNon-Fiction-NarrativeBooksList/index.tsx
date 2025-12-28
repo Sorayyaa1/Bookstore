@@ -12,7 +12,7 @@ function NonFictionNarrativeBooks(){
        let buttonValue:string | number | undefined
        buttonValue=parseInt(event.currentTarget.value)
        setBtnValue(buttonValue)
-       router.push(`/category//SomeTitlesNon-Fiction-NarrativeBooksList/${buttonValue}`) 
+       router.push(`/category/SomeTitlesNon-Fiction-NarrativeBooksList/${buttonValue}`) 
        const finedBook=allBooksList.find(item=>item.id===buttonValue)
        if(finedBook){
         setSelectedBook(finedBook)

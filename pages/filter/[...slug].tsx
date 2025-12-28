@@ -1,23 +1,20 @@
-"use client";
-
-import {useDispatch, useSelector} from "react-redux"
 import Image from 'next/image';
 import { useContext } from "react"
 import {BookContext} from "../Context/index"
 import { useRouter } from 'next/router';
 
-const BookDetails = () => {
-  const store=useSelector(store=>store)
-  console.log(store)
-  const dispatch=useDispatch()
+const FilterBookDetails = () => {
   const router=useRouter()
-  const{selectedBook,btnValue,setSelectedBook,allBooksList}=useContext(BookContext) 
-  const finedBook=allBooksList.find(item=>item.id===btnValue)
-  setSelectedBook(finedBook)    
+  const{filterItems,selectedBook,btnValue,setSelectedBook}=useContext(BookContext)
+  if(filterItems){
+    const finedBook=filterItems.find(item=>item.id===btnValue)
+    setSelectedBook(finedBook) 
+  }
+    
 
   function AddToShoppingCart(){
     
-    router.push('/allBooks/shoppingCart')
+    router.push('/shoppingCart')
   }
 
   return (
@@ -67,13 +64,11 @@ const BookDetails = () => {
               </div>
             </div>
           ) :
-          (<div className='min-h-screen flex items-center justify-center bg-amber-600 opacity-75'>
-               <p className=' text-5xl text-amber-100 font-extrabold'>The desired book does not exist.</p>
-          </div>)
+          (undefined)
           
         }
     </div>
   );
 };
 
-export default BookDetails;
+export default FilterBookDetails;

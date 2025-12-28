@@ -42,7 +42,7 @@ body {
 }
 
 .selectBook div:nth-of-type(3){
- width: 15%;
+ width: 20%;
 }
 
 .selectBook label{
@@ -54,6 +54,9 @@ body {
   .contactUsInputs{
    @apply outline-none w-full border-2 border-amber-600 rounded-xl p-2
 }
+  .shopBtns{
+   @apply bg-amber-400 rounded-2xl text-xl py-2 w-1/2 shadow-amber-800 shadow-lg hover:bg-amber-700 hover:text-amber-100
+  }
 
 }
 
