@@ -8,11 +8,11 @@ const FictionBookDetails = () => {
   const{selectedBook,btnValue,setSelectedBook,allBooksList}=useContext(BookContext) 
   const finedBook=allBooksList.find(item=>item.id===btnValue)
   setSelectedBook(finedBook)     
-console.log("???:",btnValue);
+
 
   function AddToShoppingCart(){
     
-    router.push('/allBooks/shoppingCart')
+    router.push('/shoppingCart')
   }
 
   return (

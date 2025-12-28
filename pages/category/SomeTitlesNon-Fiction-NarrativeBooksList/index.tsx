@@ -2,7 +2,7 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import { useContext } from "react"
 import {BookContext} from "../../Context/index"
-import Link from "next/link"
+
 
 function NonFictionNarrativeBooks(){
     const {allBooksList,setSelectedBook,setBtnValue}=useContext(BookContext)
@@ -19,6 +19,10 @@ function NonFictionNarrativeBooks(){
        } 
    }
 
+   function handlerCategoryPage(){
+        router.push('/category/SomeTitlesNon-Fiction-NarrativeBooksList/AllNonFictionNarrativeBooks')
+      }
+
    const NonFictionNarrativeBooksList=allBooksList.filter(item=>item.category==="non-Fiction-Narrative")
 
 
@@ -29,7 +33,7 @@ function NonFictionNarrativeBooks(){
                     <p className=" text-amber-100 text-xl font-bold text-center">Category: Non-Fiction-Narrative</p>
                 </div>
                 <div>
-                    <Link href={"llk"} className="text-amber-950 font-bold py-2 px-6 rounded-3xl hover:bg-amber-950 hover:opacity-80 hover:text-amber-100">See More</Link>
+                    <button onClick={handlerCategoryPage} className="text-amber-950 font-bold py-2 px-6 rounded-3xl hover:bg-amber-950 hover:opacity-80 hover:text-amber-100">See More</button>
                 </div>
             </div>
             <div className=" grid grid-cols-4 gap-8 p-10">

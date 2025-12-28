@@ -11,7 +11,7 @@ const FictionBookDetails = () => {
 
   function AddToShoppingCart(){
     
-    router.push('/allBooks/shoppingCart')
+    router.push('/shoppingCart')
   }
 
   return (

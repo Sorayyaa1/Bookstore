@@ -23,10 +23,7 @@ function Home(){
            setFilterItems(filterItem)
            
         }
-       
-        
-        router.push('/filter')
-        
+        router.push('/filter') 
     }
 
    return(
@@ -78,7 +75,7 @@ function Home(){
                         <option value="10000">$ 10000</option>
                     </select>
                 </div>
-                <button type="button" onClick={()=>handlerSearch} className="text-amber-400 bg-amber-600 font-bold py-2 px-6 rounded-xl hover:bg-yellow-600 hover:text-amber-100 ">Search</button>
+                <button type="button" onClick={()=>handlerSearch(search)} className="text-amber-400 bg-amber-600 font-bold py-2 px-6 rounded-xl hover:bg-yellow-600 hover:text-amber-100 ">Search</button>
             </div>
             
         </div>

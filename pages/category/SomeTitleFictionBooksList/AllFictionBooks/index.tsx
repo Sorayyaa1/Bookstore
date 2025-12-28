@@ -4,13 +4,15 @@ import { useContext } from "react"
 import {BookContext} from "../../../Context/index"
 
 function AllFictionBooks(){
-    const {allBooksList,setSelectedBook}=useContext(BookContext)
+    const {allBooksList,setSelectedBook,setBtnValue}=useContext(BookContext)
     const router=useRouter()
 
       function handleClick(event:React.MouseEvent<HTMLButtonElement>){
-       const buttonValue=event.currentTarget.value
-       router.push(`/category/${buttonValue}`) 
-       const finedBook=allBooksList.find(item=>item.id===parseInt(buttonValue))
+        let buttonValue:string | number | undefined
+       buttonValue=parseInt(event.currentTarget.value)
+       setBtnValue(buttonValue)
+       router.push(`/category/SomeTitleFictionBooksList/AllFictionBooks/${buttonValue}`) 
+       const finedBook=allBooksList.find(item=>item.id===buttonValue)
        if(finedBook){
         setSelectedBook(finedBook)
        } 
@@ -20,9 +22,11 @@ function AllFictionBooks(){
 
 
     return(
-        <div className="bg-transparent" id="Fiction">
-           
-            <div className=" grid grid-cols-4 gap-8 p-10">
+        <div className="bg-transparent">
+           <div className="bg-amber-900 opacity-90">
+                <h1 className="text-4xl text-amber-900 text-center py-8">All Fiction Books</h1>
+            </div>
+            <div className=" grid grid-cols-4 gap-8 p-10 bg-amber-600 opacity-75">
                 {
                     FictionBooksList.map((item,index)=>(
                         <div key={index} className="flex flex-col gap-4 border-2 border-amber-50 rounded-t-2xl p-4 font-semibold text-amber-950 hover:shadow-lg hover:shadow-amber-800 scale-100 transform hover:scale-105 transition-transform duration-300 ease-in-out ">

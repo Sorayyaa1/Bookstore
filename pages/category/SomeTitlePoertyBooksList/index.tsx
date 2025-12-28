@@ -2,7 +2,7 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import { useContext } from "react"
 import {BookContext} from "../../Context/index"
-import Link from "next/link"
+
 
 function PoetryBooks(){
     const {allBooksList,setSelectedBook,setBtnValue}=useContext(BookContext)
@@ -17,7 +17,11 @@ function PoetryBooks(){
        if(finedBook){
         setSelectedBook(finedBook)
        } 
-   }
+      }
+      
+      function handlerCategoryPage(){
+        router.push('/category/SomeTitlePoertyBooksList/AllPoetryBooks')
+      }
 
    const PoetryBooksList=allBooksList.filter(item=>item.category==="Poetry")
 
@@ -29,7 +33,7 @@ function PoetryBooks(){
                     <p className=" text-amber-100 text-xl font-bold text-center">Category: Poetry</p>
                 </div>
                 <div>
-                    <Link href={"llk"} className="text-amber-950 font-bold py-2 px-6 rounded-3xl hover:bg-amber-950 hover:opacity-80 hover:text-amber-100">See More</Link>
+                    <button onClick={handlerCategoryPage} className="text-amber-950 font-bold py-2 px-6 rounded-3xl hover:bg-amber-950 hover:opacity-80 hover:text-amber-100">See More</button>
                 </div>
             </div>
             <div className=" grid grid-cols-4 gap-8 p-10">
