@@ -1,12 +1,14 @@
-import FictionBooks from "../Components/SomeTitleFictionBooksList/index"
-import PoetryBooks from "../Components/SomeTitlePoertyBooksList"
-import ScienceBooks from "../Components/SomeTitleScienceBooksList/index"
-import NonFictionNarrativeBooks from "../Components/SomeTitlesNon-Fiction-NarrativeBooksList/index"
+import FictionBooks from "./SomeTitleFictionBooksList/index"
+import PoetryBooks from "./SomeTitlePoertyBooksList"
+import ScienceBooks from "./SomeTitleScienceBooksList/index"
+import NonFictionNarrativeBooks from "./SomeTitlesNon-Fiction-NarrativeBooksList/index"
 import Link from "next/link"
- const categoryList=["Fiction","Science","Poerty","Non-Fiction-Narrative"]
+
+
+const categoryList=["Fiction","Science","Poerty","Non-Fiction-Narrative"]
 
 function Category(){
-    
+
     return(
         <div>
             <div className="bg-amber-900 opacity-90">

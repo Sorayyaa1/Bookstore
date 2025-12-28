@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { useContext } from "react"
-import {BookContext} from "../Context/index"
+import {BookContext} from "../../Context/index"
 import { useRouter } from 'next/router';
 
-const BookDetails = () => {
+const FictionBookDetails = () => {
   const router=useRouter()
   const{selectedBook,btnValue,setSelectedBook,allBooksList}=useContext(BookContext) 
   const finedBook=allBooksList.find(item=>item.id===btnValue)
@@ -55,13 +55,11 @@ const BookDetails = () => {
               
             </div>
           ) :
-          (<div className='min-h-screen flex items-center justify-center bg-amber-600 opacity-75'>
-               <p className=' text-5xl text-amber-100 font-extrabold'>The desired book does not exist.</p>
-          </div>)
+          (undefined)
           
         }
     </div>
   );
 };
 
-export default BookDetails;
+export default FictionBookDetails;

@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { useContext } from "react"
-import {BookContext} from "../Context/index"
+import {BookContext} from "../../Context/index"
 import { useRouter } from 'next/router';
 
-const BookDetails = () => {
+const FictionBookDetails = () => {
   const router=useRouter()
   const{selectedBook,btnValue,setSelectedBook,allBooksList}=useContext(BookContext) 
   const finedBook=allBooksList.find(item=>item.id===btnValue)
@@ -64,4 +64,4 @@ const BookDetails = () => {
   );
 };
 
-export default BookDetails;
+export default FictionBookDetails;

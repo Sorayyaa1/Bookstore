@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import booksSlice from "../lib/features/books/booksSlice"
+import booksSlice from "./features/books/booksSlice"
 
 export const makeStore = () => {
   return configureStore({
@@ -8,6 +8,8 @@ export const makeStore = () => {
     },
   });
 };
+
+export const store=makeStore()
 
 export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore['getState']>;

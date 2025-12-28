@@ -1,6 +1,6 @@
-import { createContext, SetStateAction } from "react";
-import { useState } from "react";
-
+import { createContext } from "react";
+import { useState,useEffect } from "react";
+import {CartItemType} from "../../lib/features/books/booksSlice"
 interface children{
     children:React.ReactNode
 }
@@ -24,7 +24,8 @@ selectedBook:book | undefined
 setSelectedBook:React.Dispatch<React.SetStateAction<book | undefined>>
 btnValue: number | undefined
 setBtnValue:React.Dispatch<React.SetStateAction<number | undefined>>
-
+qty:number
+setQty:React.Dispatch<React.SetStateAction<number>>
 }
 
 const allBooksList:book[]=[
@@ -60,11 +61,11 @@ function BookProvider({children}:children){
     const [filterItems,setFilterItems]=useState<book[]>([])
     const [selectedBook,setSelectedBook]=useState<book>()
     const [btnValue,setBtnValue]=useState<number>()
-    // const [shoppingCart,setShoppingCart]=useState<book[]>([])
-   
+    const [qty,setQty]=useState<number>(0)
+    
     
     return(
-        <BookContext.Provider value={{allBooksList,setFilterItems,filterItems,selectedBook,setSelectedBook,btnValue,setBtnValue}}>
+        <BookContext.Provider value={{allBooksList,setFilterItems,filterItems,selectedBook,setSelectedBook,btnValue,setBtnValue,qty,setQty}}>
            {children}
         </BookContext.Provider >
 

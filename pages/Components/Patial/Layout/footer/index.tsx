@@ -1,7 +1,7 @@
-import {footerLinks} from "../../../core/constance/FooterLinks"
+import {footerLinks} from "../../../../core/constance/FooterLinks"
 import Image from "next/image"
 import Link from "next/link"
-import FooterImage from "../../../../public/Images/FooterImage.jpg"
+import FooterImage from "../../../../../public/Images/FooterImage.jpg"
 function Footer(){
     return(
         <div className="flex gap-2 bg-black text-amber-900">

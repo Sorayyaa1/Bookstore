@@ -4,7 +4,6 @@ import { ChangeEvent, useState ,useContext } from "react";
 import { useRouter } from "next/router";
 import { book, BookContext } from "./Context";
 import {categoryArray} from "./core/constance/categoryList"
-import { log } from "console";
 
 function Home(){
     
@@ -22,9 +21,9 @@ function Home(){
             let filterItem:book[]
             filterItem=allBooksList.filter(item=>item.title.toLowerCase().includes(Item.toLowerCase()))
            setFilterItems(filterItem)
-           console.log("es geht");
+           
         }
-        console.log("es geht");
+       
         
         router.push('/filter')
         
@@ -79,7 +78,7 @@ function Home(){
                         <option value="10000">$ 10000</option>
                     </select>
                 </div>
-                <button type="button" onClick={handlerSearch} className="text-amber-400 bg-amber-600 font-bold py-2 px-6 rounded-xl hover:bg-yellow-600 hover:text-amber-100 ">Search</button>
+                <button type="button" onClick={()=>handlerSearch} className="text-amber-400 bg-amber-600 font-bold py-2 px-6 rounded-xl hover:bg-yellow-600 hover:text-amber-100 ">Search</button>
             </div>
             
         </div>
