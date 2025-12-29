@@ -1,7 +1,6 @@
 import Link from "next/link"
 import {Icons} from "../../../UI/icon/icon"
-import { useContext } from "react"
-import {BookContext} from "../../../../Context/index"
+
 
 interface nav{
     id:number
@@ -17,9 +16,8 @@ const NavbarLink:nav[]=[
 
 
 function Header(){
-    const {qty}=useContext(BookContext)
-    // const qty=state.cartItems.length
-     console.log(qty)
+    
+    
     return(
         <div className="flex justify-between w-full absolute z-10 py-8 px-10">
             <h1 className="text-amber-500 text-4xl font-bold">Bookstore</h1>
@@ -32,7 +30,7 @@ function Header(){
                 }
                 </div>
                 <div className="flex flex-col gap-0 items-center justify-center">
-                    <span className="w-2/4  text-amber-100 text-xs max-w-xl ">{qty}</span>
+                    <span className="w-2/4  text-amber-100 text-xs max-w-xl ">0</span>
                     <div className=" flex flex-col items-center justify-center w-2/4 min-w-7 max-h-10">
                        <Icons icon={'shoppingCart'} />
                     </div>

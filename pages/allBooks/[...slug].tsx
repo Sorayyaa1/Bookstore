@@ -1,6 +1,7 @@
 "use client";
 
 import {useDispatch, useSelector} from "react-redux"
+import {addItem} from '../../lib/features/books/booksSlice'
 import Image from 'next/image';
 import { useContext } from "react"
 import {BookContext} from "../Context/index"
@@ -17,7 +18,7 @@ const BookDetails = () => {
 
   function AddToShoppingCart(){
     
-    router.push('/allBooks/shoppingCart')
+    router.push('/shoppingCart')
   }
 
   return (
@@ -62,7 +63,7 @@ const BookDetails = () => {
                     <span>0</span>
                     <button className="shopBtns px-4">-</button>
                   </div>
-                  <button  onClick={AddToShoppingCart} className="shopBtns w-2/3">Add To Shapping Cart</button>
+                  <button  onClick={AddToShoppingCart}  className="shopBtns w-2/3">Add To Shapping Cart</button>
                 </div>
               </div>
             </div>

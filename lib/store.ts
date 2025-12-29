@@ -4,7 +4,7 @@ import booksSlice from "./features/books/booksSlice"
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      book: booksSlice,
+      cart: booksSlice,
     },
   });
 };
