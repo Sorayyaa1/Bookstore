@@ -18,8 +18,8 @@ function Footer(){
                   {
                 footerLinks.map((item,index)=>(
                     <div key={index} className="flex flex-col gap-3 ">
-                        <p className="font-semibold">{item.title}</p>
-                        <div className="flex flex-col gap-3 text-sm">
+                        <p className="font-semibold md:text-sm sm:text-sm">{item.title}</p>
+                        <div className="flex flex-col gap-3 text-sm md:text-xs sm:text-[1.2vw]">
                             {
                                 item.sub.map((item,index)=>(
                                     <Link href={""}><p key={index}>{item}</p></Link> 

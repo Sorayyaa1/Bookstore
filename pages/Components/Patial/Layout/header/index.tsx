@@ -20,12 +20,12 @@ function Header(){
     
     return(
         <div className="flex justify-between w-full absolute z-10 py-8 px-10">
-            <h1 className="text-amber-500 text-4xl font-bold">Bookstore</h1>
+            <h1 className="text-amber-500 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl @max-w-xs:{text-xl} font-bold">Bookstore</h1>
             <div className="flex gap-8 text-amber-500 justify-center">
-                <div className="flex gap-8 justify-center">
-                {
+                <div className="flex xl:gap-6 lg:gap-4 md:gap-2 sm:gap-1 justify-center">
+                { 
                     NavbarLink.map((item,index)=>(
-                        <Link key={index} href={`/${item.path}`} className=" font-bold py-2 px-6 rounded-3xl hover:bg-yellow-600 hover:text-amber-100 ">{item.title}</Link>
+                        <Link key={index} href={`/${item.path}`} className=" font-bold xl:text-lg lg:text-base md:text-sm sm:text-[0.7rem] @max-w-xs:{text-[0.4rem]} py-2 px-6 rounded-3xl hover:bg-yellow-600 hover:text-amber-100 ">{item.title}</Link>
                     ))
                 }
                 </div>

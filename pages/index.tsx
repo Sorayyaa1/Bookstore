@@ -65,46 +65,48 @@ function Home(){
                position:"absolute"
              }}
             />
-            <div className="absolute z-10 top-1/4 flex flex-col items-center gap-4 w-full">
-                <p className="text-5xl text-amber-400 font-extrabold max-w-lg">A world of books, one click away</p>
-                <p className="text-amber-500 text-lg font-semibold">Thousands of books across genres and ages, waiting to inspire your next chapter</p>
+            <div className="absolute z-10 top-1/4 flex flex-col items-center gap-8 w-full">
+                <p className="xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl max-w-xs:{text-xl} text-amber-400 font-extrabold ">A world of books, one click away</p>
+                <p className="text-amber-500 xl:text-lg lg:text-md md:text-sm sm:text-xs xs:text-xs  font-semibold">Thousands of books across genres and ages, waiting to inspire your next chapter</p>
             </div>
-            <div className="selectBook w-7/12 p-6 absolute z-10 top-7/12 flex items-end gap-4 text-amber-500 bg-amber-900 opacity-80 rounded-2xl">
-                <div>
-                   <label htmlFor="searchBook" >Search Book</label>
-                   <input type="text" placeholder="Search by title/ author's name" id="searchBook" className="outline-none w-full border-2 border-amber-600 rounded-xl p-2" onChange={handlerChangeInput}/>
+            <div className=" w-9/12 py-8 px-6 absolute z-10 top-6/12 flex flex-col items-center gap-6 text-amber-500 bg-amber-900 opacity-80 rounded-2xl ">
+                <div className="searchbar w-11/12 flex items-center gap-2">
+                   <label htmlFor="searchBook"  className="w-3/12 text-lg lg:text-base md:text-sm sm:text-xs font-semibold">Search Book</label>
+                   <input type="text" placeholder="Search by title/ author's name" id="searchBook" className="outline-none w-full border-2 border-amber-600 rounded-xl p-2 selectBookRespansvieText" onChange={handlerChangeInput}/>
                 </div>
-                <div>
-                    <label htmlFor="genre" >Genre</label>
-                    <select name="" id="genre" onChange={handlerCategory} className="border-2 border-amber-600 rounded-xl p-2 text-amber-600">
+                <div className="DetailsSearchedBook w-11/12 flex  gap-4 justify-between items-end">
+                    <div>
+                        <label htmlFor="genre" className="text-lg font-semibold lg:text-base md:text-sm sm:text-xs">Genre</label>
+                        <select name="" id="genre" onChange={handlerCategory} className="border-2 border-amber-600 rounded-xl p-2 text-amber-600 DetailsSearchedBookRespansvieText">
                         {
                             categoryArray.map((item,index)=>(
                                 <option key={index} value={item.category}>{item.title}</option>
                             ))
                         }
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="priceFrom" >Price From</label>
-                    <select onChange={handlerPriceFrom} name="" id="priceFrom" className="border-2 border-amber-600 rounded-xl p-2 text-amber-600">
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="priceFrom" >Price From</label>
+                        <select onChange={handlerPriceFrom} name="" id="priceFrom" className="border-2 border-amber-600 rounded-xl p-2 text-amber-600 DetailsSearchedBookRespansvieText">
                         {
                             priceFromList.map((item,index)=>(
-                               <option key={index} value={item.value}>$ {item.price}</option>
+                               <option key={index} value={item.value} >$ {item.price}</option>
                             ))
                         }
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="priceTo" >Price To</label>
-                    <select onChange={handlerPriceTo} name="" id="priceTo" className="border-2 border-amber-600 rounded-xl p-2 text-amber-600">
+                       </select>
+                    </div>
+                    <div>
+                        <label htmlFor="priceTo" >Price To</label>
+                        <select onChange={handlerPriceTo} name="" id="priceTo" className="border-2 border-amber-600 rounded-xl p-2 text-amber-600 DetailsSearchedBookRespansvieText">
                         {
                             priceToList.map((item,index)=>(
-                                <option key={index} value={item.value}>$ {item.price}</option>
+                                <option key={index} value={item.value} >$ {item.price}</option>
                             ))
                         }
-                    </select>
+                        </select>
+                    </div>  
                 </div>
-                <button type="button" onClick={()=>handlerSearch(search)} className="text-amber-400 bg-amber-600 font-bold py-2 px-6 rounded-xl hover:bg-yellow-600 hover:text-amber-100 ">Search</button>
+                <button type="button" onClick={()=>handlerSearch(search)} className="text-amber-400 bg-amber-600 font-bold py-2 px-6 w-5/12 rounded-xl hover:bg-yellow-600 hover:text-amber-100 xl:text-lg lg:text-base md:text-sm sm:text-[1.9vw]">Search</button>
             </div>
             
         </div>
