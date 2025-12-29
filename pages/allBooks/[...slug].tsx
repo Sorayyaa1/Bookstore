@@ -1,15 +1,14 @@
 "use client";
 
 import {useDispatch, useSelector} from "react-redux"
-import {addItem} from '../../lib/features/books/booksSlice'
+import {addItem,increment,decrement } from '../../lib/features/books/booksSlice'
 import Image from 'next/image';
 import { useContext } from "react"
 import {BookContext} from "../Context/index"
 import { useRouter } from 'next/router';
 
 const BookDetails = () => {
-  const store=useSelector(store=>store)
-  console.log(store)
+ 
   const dispatch=useDispatch()
   const router=useRouter()
   const{selectedBook,btnValue,setSelectedBook,allBooksList}=useContext(BookContext) 
@@ -17,8 +16,22 @@ const BookDetails = () => {
   setSelectedBook(finedBook)    
 
   function AddToShoppingCart(){
-    
+    if(selectedBook){
+      dispatch(addItem(selectedBook))
+    }
     router.push('/shoppingCart')
+  }
+
+  function Increment (){
+    if(selectedBook){
+      dispatch(increment(selectedBook.id))
+    }
+    
+  }
+   function Decrement (){
+    if(selectedBook){
+    dispatch(decrement (selectedBook.id))
+    }
   }
 
   return (
@@ -59,9 +72,11 @@ const BookDetails = () => {
                 <p className="bg-amber-500 py-2 px-6 rounded-2xl">{selectedBook.price} $</p>
                 <div className="flex justify-between w-2/3  ">
                   <div className="flex gap-4 px-[1vw] items-center">
-                    <button className="shopBtns px-4">+</button>
-                    <span>0</span>
-                    <button className="shopBtns px-4">-</button>
+                    <button onClick={Increment} className="shopBtns px-4">+</button>
+                    <span>
+                      {/* {qty} */}
+                      </span>
+                    <button onClick={Decrement} className="shopBtns px-4">-</button>
                   </div>
                   <button  onClick={AddToShoppingCart}  className="shopBtns w-2/3">Add To Shapping Cart</button>
                 </div>

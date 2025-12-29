@@ -1,7 +1,10 @@
 import Link from "next/link"
 import {Icons} from "../../../UI/icon/icon"
+// import { useSelector} from "react-redux"
 
 
+//  const store=useSelector(state=>state.cart.cartItems)
+//   const qty=store.length()
 interface nav{
     id:number
     title:string
@@ -13,6 +16,7 @@ const NavbarLink:nav[]=[
     {id:3,title:"Category",path:'category'},
     {id:4,title:"Contact Us",path:'contactUs'},
 ]
+
 
 
 function Header(){
@@ -30,7 +34,9 @@ function Header(){
                 }
                 </div>
                 <div className="flex flex-col gap-0 items-center justify-center">
-                    <span className="w-2/4  text-amber-100 text-xs max-w-xl ">0</span>
+                    <span className="w-2/4  text-amber-100 text-xs max-w-xl ">
+                       {/* {qty} */}
+                    </span>
                     <div className=" flex flex-col items-center justify-center w-2/4 min-w-7 max-h-10">
                        <Icons icon={'shoppingCart'} />
                     </div>
