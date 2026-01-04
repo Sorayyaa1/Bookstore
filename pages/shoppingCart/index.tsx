@@ -26,7 +26,13 @@ function shoppingCart(){
         Item=shoppingCartItms.find(item=>item.cartItem.id===id)
         Item ? dispatch(removeItem(Item.cartItem.id)) : Item
       }
-    
+      
+      const ItemsPrice:number[]=shoppingCartItms.map(item=>item.cartItem.price*item.qty)
+      let totalPrice:number=0
+      for(let i of ItemsPrice){
+           totalPrice+=i
+      }
+      
 
     return(
         <div>
@@ -50,7 +56,11 @@ function shoppingCart(){
                                     </div>
                                     <div className='flex justify-center gap-15 text-lg'>
                                         <p>{Item.cartItem.title}</p>
-                                        <p>{Item.cartItem.price}</p>
+                                        <p>
+                                            {
+                                              Item.cartItem.price*Item.qty
+                                            }
+                                        </p>
                                         <div>
                                             <div className="flex gap-4 px-[1vw] items-center">
                                                <button onClick={()=>Increment(Item.cartItem.id)} className="shopBtns px-4">+</button>
@@ -59,6 +69,7 @@ function shoppingCart(){
                                             </div>
                                         </div>
                                         <button onClick={()=>Remove(Item.cartItem.id)} className="bg-amber-400 rounded-2xl py-2 hover:bg-amber-700 hover:text-amber-100">remove</button>
+                                        <p>Total:{totalPrice}</p>
                                     </div>
                                 </div> 
                             ))
