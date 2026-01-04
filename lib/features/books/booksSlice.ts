@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { book } from '@/pages/Context'
 
 
+
 export interface cartItem{
   cartItem:book
   qty:number
@@ -33,15 +34,14 @@ const initialState: CartItemsState = {
 }
 
 
-
 export const bookSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addItem: (state:CartItemsState,action:PayloadAction<book>) => {
-      let Item:cartItem | undefined 
+      let Item:cartItem | undefined
       Item=state.cartItems.find((item:cartItem)=>item.cartItem.id===action.payload.id)
-      Item ?  (Item.qty+=1) :  Item //به سبد خرید آیتمی اضافه نمیشه
+      Item ?  (Item.qty+=1) : state.cartItems.push({cartItem:action.payload,qty:1})
       localStorage.setItem('cart',JSON.stringify(state.cartItems))
       },
       increment:(state:CartItemsState,action:PayloadAction<number>)=>{
@@ -53,14 +53,14 @@ export const bookSlice = createSlice({
       decrement:(state:CartItemsState,action:PayloadAction<number>)=>{
           let Item:cartItem | undefined
           Item=state.cartItems.find((item:cartItem)=>item.cartItem.id===action.payload) 
-          Item && Item.qty>0 ?  ( Item.qty-=1) : Item
+          Item && Item.qty>0 ?  (Item.qty-=1) : Item
           localStorage.setItem('cart',JSON.stringify(state.cartItems))
       },
       removeItem: (state:CartItemsState,action:PayloadAction<number>) => {
         state.cartItems=state.cartItems.filter((item:cartItem)=>item.cartItem.id!==action.payload)
         localStorage.setItem('cart',JSON.stringify(state.cartItems))
      },
-  }
+  },
 })
 
 export const { addItem,increment,decrement,removeItem } = bookSlice.actions

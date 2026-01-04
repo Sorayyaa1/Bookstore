@@ -33,6 +33,8 @@ priceTo:number
 setPriceTo:React.Dispatch<React.SetStateAction<number>>
 qty:number
 setQty:React.Dispatch<React.SetStateAction<number>>
+shoppingCart:book[]
+setshoppingCart:React.Dispatch<React.SetStateAction<book[] | never>>
 }
 
 const allBooksList:book[]=[
@@ -73,9 +75,9 @@ function BookProvider({children}:children){
     const [priceFrom,setPriceFrom]=useState<number>(10)
     const [priceTo,setPriceTo]=useState<number>(10)
     const [qty,setQty]=useState<number>(0)
-
+    const [shoppingCart,setshoppingCart]=useState<book[]>([]) 
     return(
-        <BookContext.Provider value={{allBooksList,setFilterItems,filterItems,selectedBook,setSelectedBook,btnValue,setBtnValue,categoryFilter,setCategoryFilter,priceFrom,setPriceFrom,priceTo,setPriceTo,qty,setQty}}>
+        <BookContext.Provider value={{allBooksList,setFilterItems,filterItems,selectedBook,setSelectedBook,btnValue,setBtnValue,categoryFilter,setCategoryFilter,priceFrom,setPriceFrom,priceTo,setPriceTo,qty,setQty,shoppingCart,setshoppingCart}}>
            {children}
         </BookContext.Provider >
 

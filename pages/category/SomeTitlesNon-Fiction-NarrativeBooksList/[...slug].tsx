@@ -62,7 +62,7 @@ const FictionBookDetails = () => {
             </div>
           ) :
           (<div className='min-h-screen flex items-center justify-center bg-amber-600 opacity-75'>
-               <p className=' text-5xl text-amber-100 font-extrabold'>The desired book does not exist.</p>
+               <p className=' text-5xl text-amber-100 font-extrabold'>The book not found.</p>
           </div>)
           
         }

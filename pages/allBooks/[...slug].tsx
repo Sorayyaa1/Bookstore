@@ -1,38 +1,31 @@
 "use client";
 
-import {useDispatch, useSelector} from "react-redux"
+import {useDispatch,useSelector} from "react-redux"
+import { RootState } from "../../lib/store";
 import {addItem,increment,decrement } from '../../lib/features/books/booksSlice'
 import Image from 'next/image';
 import { useContext } from "react"
 import {BookContext} from "../Context/index"
 import { useRouter } from 'next/router';
 
+
 const BookDetails = () => {
- 
+  let shoppingCartItms=useSelector((state:RootState)=>state.cart.cartItems)
   const dispatch=useDispatch()
   const router=useRouter()
   const{selectedBook,btnValue,setSelectedBook,allBooksList}=useContext(BookContext) 
   const finedBook=allBooksList.find(item=>item.id===btnValue)
-  setSelectedBook(finedBook)    
+  setSelectedBook(selectedBook)    
+ console.log(finedBook)
 
   function AddToShoppingCart(){
     if(selectedBook){
       dispatch(addItem(selectedBook))
     }
     router.push('/shoppingCart')
-  }
-
-  function Increment (){
-    if(selectedBook){
-      dispatch(increment(selectedBook.id))
     }
     
-  }
-   function Decrement (){
-    if(selectedBook){
-    dispatch(decrement (selectedBook.id))
-    }
-  }
+  
 
   return (
     <div>
@@ -71,20 +64,14 @@ const BookDetails = () => {
               <div className='flex justify-between items-center w-10/12 mx-auto px-[10vw] '>
                 <p className="bg-amber-500 py-2 px-6 rounded-2xl">{selectedBook.price} $</p>
                 <div className="flex justify-between w-2/3  ">
-                  <div className="flex gap-4 px-[1vw] items-center">
-                    <button onClick={Increment} className="shopBtns px-4">+</button>
-                    <span>
-                      {/* {qty} */}
-                      </span>
-                    <button onClick={Decrement} className="shopBtns px-4">-</button>
-                  </div>
-                  <button  onClick={AddToShoppingCart}  className="shopBtns w-2/3">Add To Shapping Cart</button>
+                  
+                  <button onClick={AddToShoppingCart} className="shopBtns w-2/3">Add To Shapping Cart</button>
                 </div>
               </div>
             </div>
           ) :
           (<div className='min-h-screen flex items-center justify-center bg-amber-600 opacity-75'>
-               <p className=' text-5xl text-amber-100 font-extrabold'>The desired book does not exist.</p>
+               <p className=' text-5xl text-amber-100 font-extrabold'>The book not found.</p>
           </div>)
           
         }

@@ -1,9 +1,10 @@
 import Link from "next/link"
 import {Icons} from "../../../UI/icon/icon"
-// import { useSelector} from "react-redux"
+import { useSelector} from "react-redux"
 
 
-//  const store=useSelector(state=>state.cart.cartItems)
+//  const store=useSelector(store=>store)
+//  console.log(store)
 //   const qty=store.length()
 interface nav{
     id:number

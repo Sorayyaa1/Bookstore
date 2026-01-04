@@ -4,20 +4,21 @@ import { useContext } from "react"
 import {BookContext} from "../Context/index"
 
 
-
 function AllBooks(){
     const router=useRouter()
-    const {allBooksList,setBtnValue}=useContext(BookContext)
+    const {allBooksList,setBtnValue,setSelectedBook}=useContext(BookContext)
     
     function handleClick(event:React.MouseEvent<HTMLButtonElement>){
         let buttonValue:string | number | undefined
         buttonValue=parseInt(event.currentTarget.value)
        setBtnValue(buttonValue)
        router.push(`/allBooks/${buttonValue}`) 
+        const finedBook=allBooksList.find(item=>item.id===buttonValue)
+       if(finedBook){
+        setSelectedBook(finedBook)
+       } 
    }
    
-   
-
     return(
         <div>
             <div className="bg-amber-900 opacity-90">
