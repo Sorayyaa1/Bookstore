@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux"
 import Image from "next/image"
 import { RootState } from "../../lib/store";
-import { cartItem, increment, decrement} from "@/lib/features/books/booksSlice";
+import { cartItem, increment, decrement,removeItem} from "@/lib/features/books/booksSlice";
 
 
 function shoppingCart(){
@@ -19,6 +19,12 @@ function shoppingCart(){
        let Item: cartItem | undefined
        Item=shoppingCartItms.find(item=>item.cartItem.id===id)
        Item ? dispatch(decrement(Item.cartItem.id)) : Item
+      }
+
+      function Remove(id:number){
+        let Item: cartItem | undefined
+        Item=shoppingCartItms.find(item=>item.cartItem.id===id)
+        Item ? dispatch(removeItem(Item.cartItem.id)) : Item
       }
     
 
@@ -52,7 +58,7 @@ function shoppingCart(){
                                                <button onClick={()=>Decrement(Item.cartItem.id)} className="shopBtns px-4">-</button>
                                             </div>
                                         </div>
-                                        <button className="bg-amber-400 rounded-2xl py-2 hover:bg-amber-700 hover:text-amber-100">remove</button>
+                                        <button onClick={()=>Remove(Item.cartItem.id)} className="bg-amber-400 rounded-2xl py-2 hover:bg-amber-700 hover:text-amber-100">remove</button>
                                     </div>
                                 </div> 
                             ))

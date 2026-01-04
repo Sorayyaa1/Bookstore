@@ -53,7 +53,7 @@ export const bookSlice = createSlice({
       decrement:(state:CartItemsState,action:PayloadAction<number>)=>{
           let Item:cartItem | undefined
           Item=state.cartItems.find((item:cartItem)=>item.cartItem.id===action.payload) 
-          Item && Item.qty>0 ?  (Item.qty-=1) : Item
+          Item && Item.qty>0 ?  (Item.qty-=1) : Item?.qty===0 ? (state.cartItems=state.cartItems.filter((item:cartItem)=>item.cartItem.id!==action.payload)) : Item
           localStorage.setItem('cart',JSON.stringify(state.cartItems))
       },
       removeItem: (state:CartItemsState,action:PayloadAction<number>) => {
