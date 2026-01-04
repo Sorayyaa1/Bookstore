@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux"
 import Image from "next/image"
 import { RootState } from "../../lib/store";
-import { cartItem, increment } from "@/lib/features/books/booksSlice";
+import { cartItem, increment, decrement} from "@/lib/features/books/booksSlice";
 
 
 function shoppingCart(){
@@ -11,10 +11,14 @@ function shoppingCart(){
      
      
       function Increment (id:number){
-        
+        let Item:cartItem | undefined
+        Item=shoppingCartItms.find(item=>item.cartItem.id===id)
+        Item ? dispatch(increment(Item.cartItem.id)) : Item
       }
-       function Decrement (){
-       
+       function Decrement (id:number){
+       let Item: cartItem | undefined
+       Item=shoppingCartItms.find(item=>item.cartItem.id===id)
+       Item ? dispatch(decrement(Item.cartItem.id)) : Item
       }
     
 
@@ -43,9 +47,9 @@ function shoppingCart(){
                                         <p>{Item.cartItem.price}</p>
                                         <div>
                                             <div className="flex gap-4 px-[1vw] items-center">
-                                               <button onClick={Increment} className="shopBtns px-4">+</button>
+                                               <button onClick={()=>Increment(Item.cartItem.id)} className="shopBtns px-4">+</button>
                                                <p>{Item.qty}</p>
-                                               <button onClick={Decrement} className="shopBtns px-4">-</button>
+                                               <button onClick={()=>Decrement(Item.cartItem.id)} className="shopBtns px-4">-</button>
                                             </div>
                                         </div>
                                         <button className="bg-amber-400 rounded-2xl py-2 hover:bg-amber-700 hover:text-amber-100">remove</button>
