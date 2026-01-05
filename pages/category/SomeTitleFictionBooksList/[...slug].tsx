@@ -2,18 +2,23 @@ import Image from 'next/image';
 import { useContext } from "react"
 import {BookContext} from "../../Context/index"
 import { useRouter } from 'next/router';
+import {useDispatch} from "react-redux"
+import {addItem} from "../../../lib/features/books/booksSlice"
 
 const FictionBookDetails = () => {
-   const router=useRouter()
+  const dispatch=useDispatch()
+  const router=useRouter()
   const{selectedBook,btnValue,setSelectedBook,allBooksList}=useContext(BookContext) 
   const finedBook=allBooksList.find(item=>item.id===btnValue)
   setSelectedBook(finedBook)     
 
 
   function AddToShoppingCart(){
-    
-    router.push('/shoppingCart')
-  }
+     if(selectedBook){
+       dispatch(addItem(selectedBook))
+     }
+     router.push('/shoppingCart')
+     }
 
   return (
     <div>
