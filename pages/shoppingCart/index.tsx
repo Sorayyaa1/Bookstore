@@ -39,9 +39,9 @@ function shoppingCart(){
             <div className="bg-amber-900 opacity-90">
                 <h1 className="text-4xl text-amber-900 text-center py-8">Shopping Cart</h1>
             </div>
-            <div className="bg-amber-600 opacity-75 min-h-screen flex flex-col gap-2">
-                <p className="text-3xl text-amber-100 font-bold text-center py-4"> Cart Items</p>
-                <div className="flex flex-col gap-4 p-10 ">
+            <div className="bg-amber-600 opacity-75 min-h-screen flex flex-col gap-6">
+                <p className="text-3xl text-amber-100 font-bold text-center pt-4"> Cart Items</p>
+                <div className="flex flex-col gap-3 px-10 ">
                     {
                         shoppingCartItms.length>0 ? (
                             shoppingCartItms.map((Item,index)=>(  
