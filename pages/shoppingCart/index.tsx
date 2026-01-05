@@ -39,13 +39,13 @@ function shoppingCart(){
             <div className="bg-amber-900 opacity-90">
                 <h1 className="text-4xl text-amber-900 text-center py-8">Shopping Cart</h1>
             </div>
-            <div className="bg-amber-600 opacity-75 min-h-screen flex flex-col gap-4">
-                <p className="text-3xl text-amber-100 font-bold text-center py-2"> Cart Items</p>
-                <div className="flex flex-col gap-4">
+            <div className="bg-amber-600 opacity-75 min-h-screen flex flex-col gap-2">
+                <p className="text-3xl text-amber-100 font-bold text-center py-4"> Cart Items</p>
+                <div className="flex flex-col gap-4 p-10 ">
                     {
                         shoppingCartItms.length>0 ? (
                             shoppingCartItms.map((Item,index)=>(  
-                                <div key={index} className='flex justify-between gap-10 items-center'>
+                                <div key={index} className='grid grid-cols-6 gap-6 items-center text-[1vw] text-amber-100 border-2 border-amber-100 rounded-2xl p-4 font-semibold'>
                                     <div>
                                         <Image 
                                         alt="itemImage"
@@ -54,24 +54,27 @@ function shoppingCart(){
                                         height={1280}
                                         className="rounded-lg  shadow-amber-800 shadow-xl w-1/4 h-auto"/>
                                     </div>
-                                    <div className='flex justify-center gap-15 text-lg'>
+                                    <div className='grid grid-cols-2 items-center gap-15 col-span-3'>
                                         <p>{Item.cartItem.title}</p>
-                                        <p>
+                                        <p >$
                                             {
                                               Item.cartItem.price*Item.qty
                                             }
                                         </p>
-                                        <div>
-                                            <div className="flex gap-4 px-[1vw] items-center">
-                                               <button onClick={()=>Increment(Item.cartItem.id)} className="shopBtns px-4">+</button>
-                                               <p>{Item.qty}</p>
-                                               <button onClick={()=>Decrement(Item.cartItem.id)} className="shopBtns px-4">-</button>
-                                            </div>
-                                        </div>
-                                        <button onClick={()=>Remove(Item.cartItem.id)} className="bg-amber-400 rounded-2xl py-2 hover:bg-amber-700 hover:text-amber-100">remove</button>
-                                        <p>Total:{totalPrice}</p>
                                     </div>
-                                </div> 
+                                    <div>
+                                        <div className="flex gap-4 px-[1vw] items-center">
+                                            <button onClick={()=>Increment(Item.cartItem.id)} className="shopBtns px-4">+</button>
+                                            <p>{Item.qty}</p>
+                                            <button onClick={()=>Decrement(Item.cartItem.id)} className="shopBtns px-4 ">-</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button onClick={()=>Remove(Item.cartItem.id)} className="py-2 w-full bg-amber-400 rounded-2xl  md:text-base sm:text-sm shadow-amber-800 shadow-lg hover:bg-amber-700 hover:text-amber-100 ">remove</button>
+                                    </div>
+                                    
+                                </div>
+                                 
                             ))
                                
                         ) : (
@@ -81,6 +84,7 @@ function shoppingCart(){
                         )
                     }
                 </div>
+                <p className="text-center text-amber-100 font-bold">Total: $ {totalPrice}</p>
             </div>
         </div>
     )
