@@ -6,8 +6,7 @@ import { cartItem, increment, decrement,removeItem} from "@/lib/features/books/b
 
 function shoppingCart(){
     let shoppingCartItms=useSelector((state:RootState)=>state.cart.cartItems)
-    console.log("hhhhh:",shoppingCartItms)
-     const dispatch=useDispatch()
+    const dispatch=useDispatch()
      
      
       function Increment (id:number){
@@ -56,11 +55,7 @@ function shoppingCart(){
                                     </div>
                                     <div className='grid grid-cols-2 items-center gap-15 col-span-3'>
                                         <p>{Item.cartItem.title}</p>
-                                        <p >$
-                                            {
-                                              Item.cartItem.price*Item.qty
-                                            }
-                                        </p>
+                                        <p >$ {Item.cartItem.price*Item.qty}</p>
                                     </div>
                                     <div>
                                         <div className="flex gap-4 px-[1vw] items-center">
@@ -84,7 +79,7 @@ function shoppingCart(){
                         )
                     }
                 </div>
-                <p className="text-center text-amber-100 font-bold">Total: $ {totalPrice}</p>
+                <p className="text-center text-amber-100 font-bold pb-4">Total: $ {totalPrice}</p>
             </div>
         </div>
     )

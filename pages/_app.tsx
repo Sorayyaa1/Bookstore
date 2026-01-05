@@ -8,13 +8,16 @@ import {store} from "../lib/store"
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-        <BookProvider>
-          <Provider store={store} >
+    <BookProvider>
+      <Provider store={store} >
+      <Layout>
+        
           <Component {...pageProps} />
-          </Provider>
-        </BookProvider>
-    </Layout>
+        
+      </Layout>
+      </Provider>
+    </BookProvider>
+    
   )
   
 }

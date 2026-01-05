@@ -1,11 +1,8 @@
 import Link from "next/link"
 import {Icons} from "../../../UI/icon/icon"
-import { useSelector} from "react-redux"
+import { useSelector } from "react-redux"
+import { RootState } from "@/lib/store";
 
-
-//  const store=useSelector(store=>store)
-//  console.log(store)
-//   const qty=store.length()
 interface nav{
     id:number
     title:string
@@ -21,8 +18,8 @@ const NavbarLink:nav[]=[
 
 
 function Header(){
-    
-    
+    const Cart=useSelector((state:RootState)=>state.cart.cartItems)
+    const qty=Cart.length
     return(
         <div className="flex justify-between w-full absolute z-10 py-8 px-10">
             <h1 className="text-amber-500 xl:text-4xl lg:text-3xl md:text-2xl sm:text-xl @max-w-xs:{text-xl} font-bold">Bookstore</h1>
@@ -34,13 +31,15 @@ function Header(){
                     ))
                 }
                 </div>
-                <div className="flex flex-col gap-0 items-center justify-center">
-                    <span className="w-2/4  text-amber-100 text-xs max-w-xl ">
-                       {/* {qty} */}
+                <div className="flex gap-0 items-center justify-center ">
+                    <Link href={'/shoppingCart'} className="flex justify-center">
+                    <span className="w-2/4  text-amber-500 text-xs max-w-xl -me-4 -mt-3">
+                       {qty}
                     </span>
                     <div className=" flex flex-col items-center justify-center w-2/4 min-w-7 max-h-10">
                        <Icons icon={'shoppingCart'} />
                     </div>
+                    </Link>
                 </div>
             </div>
         </div>

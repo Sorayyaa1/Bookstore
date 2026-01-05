@@ -1,6 +1,7 @@
 import { createContext } from "react";
-import { useState,useEffect } from "react";
-
+import { useState} from "react";
+import { useSelector} from "react-redux"
+import { RootState } from "@/lib/store";
 
 interface children{
     children:React.ReactNode
@@ -31,8 +32,6 @@ priceFrom:number
 setPriceFrom:React.Dispatch<React.SetStateAction<number>>
 priceTo:number
 setPriceTo:React.Dispatch<React.SetStateAction<number>>
-qty:number
-setQty:React.Dispatch<React.SetStateAction<number>>
 shoppingCart:book[]
 setshoppingCart:React.Dispatch<React.SetStateAction<book[] | never>>
 }
@@ -67,17 +66,16 @@ const allBooksList:book[]=[
 export const BookContext=createContext< BookContextType>({} as BookContextType)
 
 function BookProvider({children}:children){
-    
+   
     const [filterItems,setFilterItems]=useState<book[]>()
     const [selectedBook,setSelectedBook]=useState<book>()
     const [btnValue,setBtnValue]=useState<number>()
     const [categoryFilter,setCategoryFilter]=useState<string>('')
     const [priceFrom,setPriceFrom]=useState<number>(10)
     const [priceTo,setPriceTo]=useState<number>(10)
-    const [qty,setQty]=useState<number>(0)
     const [shoppingCart,setshoppingCart]=useState<book[]>([]) 
     return(
-        <BookContext.Provider value={{allBooksList,setFilterItems,filterItems,selectedBook,setSelectedBook,btnValue,setBtnValue,categoryFilter,setCategoryFilter,priceFrom,setPriceFrom,priceTo,setPriceTo,qty,setQty,shoppingCart,setshoppingCart}}>
+        <BookContext.Provider value={{allBooksList,setFilterItems,filterItems,selectedBook,setSelectedBook,btnValue,setBtnValue,categoryFilter,setCategoryFilter,priceFrom,setPriceFrom,priceTo,setPriceTo,shoppingCart,setshoppingCart}}>
            {children}
         </BookContext.Provider >
 

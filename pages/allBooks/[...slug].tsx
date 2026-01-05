@@ -1,8 +1,7 @@
 "use client";
 
-import {useDispatch,useSelector} from "react-redux"
-import { RootState } from "../../lib/store";
-import {addItem,increment,decrement } from '../../lib/features/books/booksSlice'
+import {useDispatch} from "react-redux"
+import {addItem} from '../../lib/features/books/booksSlice'
 import Image from 'next/image';
 import { useContext } from "react"
 import {BookContext} from "../Context/index"
@@ -10,7 +9,7 @@ import { useRouter } from 'next/router';
 
 
 const BookDetails = () => {
-  let shoppingCartItms=useSelector((state:RootState)=>state.cart.cartItems)
+
   const dispatch=useDispatch()
   const router=useRouter()
   const{selectedBook,btnValue,setSelectedBook,allBooksList}=useContext(BookContext) 
