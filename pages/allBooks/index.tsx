@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext } from "react"
 import {BookContext} from "../Context/index"
+import SearchComponent from "../Components/SearchComponent";
 
 
 function AllBooks(){
@@ -24,6 +25,9 @@ function AllBooks(){
             <div className="bg-amber-900 opacity-90">
                 <h1 className="text-4xl text-amber-900 text-center py-8">All Book</h1>
             </div>
+            <div className="bg-amber-600 opacity-75 pt-10">
+                <SearchComponent />
+            </div>
             <div className="bg-amber-600 opacity-75 grid grid-cols-4 gap-8 p-10 relative z-10">
                 {
                     allBooksList.map((item,index)=>(
@@ -41,7 +45,7 @@ function AllBooks(){
                             <p>{item.author}</p>
                             <p className="bg-amber-500 py-2 px-6 rounded-2xl">{item.price} $</p>
                            </div>
-                           <button onClick={handleClick} value={item.id} className="bg-amber-400 rounded-2xl py-2 hover:bg-amber-700 hover:text-amber-100">shop</button>
+                           <button onClick={handleClick} value={item.id} className="bg-amber-400 rounded-2xl py-2 shadow-amber-800 shadow-lg hover:bg-amber-700 hover:text-amber-100">shop</button>
                         </div>
                     ))
                 }

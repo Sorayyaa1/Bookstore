@@ -1,7 +1,6 @@
 import { createContext } from "react";
 import { useState} from "react";
-import { useSelector} from "react-redux"
-import { RootState } from "@/lib/store";
+import { ChangeEvent} from "react";
 
 interface children{
     children:React.ReactNode
@@ -20,6 +19,8 @@ export interface book{
 
 interface BookContextType{
 allBooksList:book[]
+search:string
+setSearch:React.Dispatch<React.SetStateAction<string>>
 setFilterItems:React.Dispatch<React.SetStateAction<book[] | undefined>>
 filterItems:book[] | undefined
 selectedBook:book | undefined
@@ -34,6 +35,10 @@ priceTo:number
 setPriceTo:React.Dispatch<React.SetStateAction<number>>
 shoppingCart:book[]
 setshoppingCart:React.Dispatch<React.SetStateAction<book[] | never>>
+handleChangeInput:React.ChangeEventHandler<HTMLInputElement>
+handleCategory:React.ChangeEventHandler<HTMLSelectElement>
+handlePriceFrom:React.ChangeEventHandler<HTMLInputElement>
+handlePriceTo:React.ChangeEventHandler<HTMLInputElement>
 }
 
 const allBooksList:book[]=[
@@ -62,20 +67,61 @@ const allBooksList:book[]=[
 ]
 
 
+const PriceList=allBooksList.map(item=>item.price)
+const PriceListToNumber=PriceList.map(item=>Number(item))
+const sortedPrice=PriceListToNumber.sort(function(a,b){ return a-b})
+const sortedPriceLength=sortedPrice.length-1
+const initialMaxPrice=sortedPrice[sortedPriceLength]
+console.log(initialMaxPrice)
 
 export const BookContext=createContext< BookContextType>({} as BookContextType)
 
 function BookProvider({children}:children){
    
+    const [search,setSearch]=useState<string>('')
     const [filterItems,setFilterItems]=useState<book[]>()
     const [selectedBook,setSelectedBook]=useState<book>()
     const [btnValue,setBtnValue]=useState<number>()
-    const [categoryFilter,setCategoryFilter]=useState<string>('')
-    const [priceFrom,setPriceFrom]=useState<number>(10)
-    const [priceTo,setPriceTo]=useState<number>(10)
+    const [categoryFilter,setCategoryFilter]=useState<string>('all')
+    const [priceFrom,setPriceFrom]=useState<number>(0)
+    const [priceTo,setPriceTo]=useState<number>(initialMaxPrice)
     const [shoppingCart,setshoppingCart]=useState<book[]>([]) 
+
+    function handleChangeInput(e:ChangeEvent<HTMLInputElement>){
+            const searchValue=e.target.value.trim()
+            setSearch(searchValue)
+        }
+
+    function handleCategory(event:ChangeEvent<HTMLSelectElement>){
+        const genre=event.target.value
+        setCategoryFilter(genre)         
+    }  
+    
+      function handlePriceFrom(event:ChangeEvent<HTMLInputElement>){
+        const price=event.target.value
+        const minPrice=parseInt(price)
+        setPriceFrom(minPrice)
+    }
+
+    function handlePriceTo(event:ChangeEvent<HTMLInputElement>){
+       const price=event.target.value
+       const maxPrice=parseInt(price)
+       setPriceTo(maxPrice)
+    }
+ 
+
     return(
-        <BookContext.Provider value={{allBooksList,setFilterItems,filterItems,selectedBook,setSelectedBook,btnValue,setBtnValue,categoryFilter,setCategoryFilter,priceFrom,setPriceFrom,priceTo,setPriceTo,shoppingCart,setshoppingCart}}>
+        <BookContext.Provider value={{allBooksList,search,setSearch,
+        setFilterItems,filterItems,
+        selectedBook,setSelectedBook,
+        btnValue,setBtnValue,
+        categoryFilter,setCategoryFilter,
+        priceFrom,setPriceFrom,
+        priceTo,setPriceTo,
+        shoppingCart,setshoppingCart,
+        handleChangeInput,handleCategory,
+        handlePriceFrom,handlePriceTo}}
+        >
            {children}
         </BookContext.Provider >
 
